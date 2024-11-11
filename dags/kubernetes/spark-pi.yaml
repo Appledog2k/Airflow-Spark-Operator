@@ -1,0 +1,22 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: spark-streaming-kafka
+  namespace: kube-public
+spec:
+  type: Java
+  mode: cluster
+  image: appledog2k/spark-test:latest
+  imagePullPolicy: Always
+  mainClass: com.appledog.Main
+  mainApplicationFile: local:///opt/spark/apps/Spark-Test-1.0.jar
+  sparkVersion: 3.5.3
+  driver:
+    cores: 1
+    memory: "500m"
+    serviceAccount: spark-operator
+  executor:
+    instances: 1
+    cores: 1
+    memory: "500m"
+    serviceAccount: spark-operator
